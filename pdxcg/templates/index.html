@@ -15,17 +15,21 @@
             <div class="row double">
                 <section class="4u">
                     <div class="box highlight">
-                        <h3>Developer Bootcamp</h3>
-                        <em><strong style="color: #f57b20">Day Class Starts {{ next_day_class_date }}<br>
-                            Evening Class Starts {{ next_night_class_date }}</strong></em>
+                        <h3>Upcoming Bootcamps</h3>
+                        <em><strong style="color: #f57b20"><a href="{% url 'devbootcamp' %}">{{ next_day_class_date }}:
+                            12-Week, Day</a><br>
+                            <a href="{% url 'evening_bootcamp' %}">{{ next_night_class_date }}: 16-Week,
+                                Evening</a></strong></em>
 
-                        <p><a href="{% url 'apply' %}">Apply now</a> to our 12-week day or 16 week evening full immersion Developer Bootcamp. They
-                            combine individual projects, pair programming and group study to give you the skills and
-                            habits you need to succeed in the growing tech industry.</p>
+                        <h3 style="color: #f57b20">Ready to start your career in technology?</h3>
 
-                        <p>This hands-on programing course covers Python, SQL, and the basics of JavaScript, HTML and
-                            CSS.</p>
-                        <a href="{% url 'devbootcamp' %}" class="button">More Info</a>
+                        <p><a href="{% url 'apply' %}">Apply now</a> for a full immersion Developer Bootcamp. Small
+                            classes feature individualized instruction, pair programming and group study to give you the
+                            skills you need to succeed.</p>
+
+                        <p>You’ll learn Python, Django, SQL, JavaScript, HTML5 and CSS3 and more.</p>
+
+                        <a href="{% url 'apply' %}" class="button">Apply now</a>
                     </div>
                 </section>
                 <section class="4u">
@@ -52,47 +56,46 @@
                 </section>
                 <section class="4u">
                     <div class="box highlight">
-                        <h3>Intro to Programming </h3>
-                        <em><strong style="color: #f57b20">Beginner Class Starts March 2nd</strong></em>
+                        <h3>Intro to Programming</h3>
+                        <em><strong style="color: #f57b20">Beginner Class Starts March 23rd<br>
+                            Grants Available to Qualifying Students!</strong></em>
 
                         <p>Are you interested in learning computer programming but not sure if it's for you? Are you
                             thinking about joining a coding bootcamp and want to test the waters?</p>
 
-                        <p>PDX Code Guild's Introduction to Programming is a two week 36 hour hands on class that
-                            teaches you the basics of Python programming. With short lectures and fun challenges we will
-                            introduce you to the concepts needed to start your journey to becoming a master
-                            programmer.<br></p>
+                        <p>PDX Code Guild's Introduction to Programming is a two week, 36 hour hands-on class. Learn the
+                            basics of programming. With short lectures and fun challenges we will introduce you to the
+                            concepts needed to start your journey to becoming a master programmer.<br></p>
 
-                        <p>This two week class will be held Monday, Tuesday and Thursday from 5:30 PM to 8:30 PM.
-                            Tuition is $450.<br>
-                            <a href="{% url 'introapply' %}" class="button">Apply Now</a>
+                        <p>Two weeks, Monday, Tuesday and Thursday, 5:30 PM to 8:30 PM. Tuition is $450.<br>
+                            <a href="{% url 'introapply' %}" class="button">Register Now</a>
                         </p>
                     </div>
                 </section>
             </div>
         </div>
-{#    <div class="container">#}
-{#            <div class="row double">#}
-{#                                <section class="12u">#}
-{#                                    <div class="box highlight">#}
-{#                                        <h3>PDX Code Guild Professional Services<br>#}
-{#                                            ---<br>#}
-{#                                            Your Vision; Our Team.<br>#}
-{#                                            The Leverage to Deliver Now!</h3>#}
-{##}
-{#                                        <p>#}
-{#                                        <ul>#}
-{#                                            <li>• Application Development for all platforms.</li>#}
-{#                                            <li>• Improve your process with custom software</li>#}
-{#                                            <li>• Leverage our team of experienced experts and new local talent</li>#}
-{#                                            <li>• Launch your startup faster</li>#}
-{#                                        </ul>#}
-{#                                        <a href="{% url 'contact' %}">Contact Options</a>#}
-{#                                        </p>#}
-{#                                    </div>#}
-{#                                </section>#}
-{#            </div>#}
-{#        </div>#}
+        {#    <div class="container">#}
+        {#            <div class="row double">#}
+        {#                                <section class="12u">#}
+        {#                                    <div class="box highlight">#}
+        {#                                        <h3>PDX Code Guild Professional Services<br>#}
+        {#                                            ---<br>#}
+        {#                                            Your Vision; Our Team.<br>#}
+        {#                                            The Leverage to Deliver Now!</h3>#}
+        {##}
+        {#                                        <p>#}
+        {#                                        <ul>#}
+        {#                                            <li>• Application Development for all platforms.</li>#}
+        {#                                            <li>• Improve your process with custom software</li>#}
+        {#                                            <li>• Leverage our team of experienced experts and new local talent</li>#}
+        {#                                            <li>• Launch your startup faster</li>#}
+        {#                                        </ul>#}
+        {#                                        <a href="{% url 'contact' %}">Contact Options</a>#}
+        {#                                        </p>#}
+        {#                                    </div>#}
+        {#                                </section>#}
+        {#            </div>#}
+        {#        </div>#}
     </section>
 
     <section class="wrapper style2">
