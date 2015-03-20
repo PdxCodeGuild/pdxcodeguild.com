@@ -7,13 +7,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="shortcut icon" type="image/png" href="{{ STATIC_URL }}favicon.ico"/>
     <meta http-equiv="Cache-control" content="public">
-    {% compress css %}
+{#    {% compress css %}#}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}fluent_comments/css/ajaxcomments.css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/skel.css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/style-wide.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/skel.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style-wide.css"/>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css"/>
-    {% endcompress %}
+{#    {% endcompress %}#}
 
     <script>
         (function (i, s, o, g, r, a, m) {
@@ -32,7 +32,7 @@
         ga('require', 'displayfeatures');
         ga('send', 'pageview');
     </script>
-    {% compress js %}
+{#    {% compress js %}#}
     <!--[if lte IE 8]>
     <script src="css/ie/html5shiv.js"></script><![endif]-->
     <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
@@ -43,8 +43,8 @@
     <script src="{{ STATIC_URL }}js/jquery.dropotron.min.js"></script>
     <script src="{{ STATIC_URL }}js/skel.min.js"></script>
     <script src="{{ STATIC_URL }}js/skel-layers.min.js"></script>
-    <script src="{{ STATIC_URL }}js/init.js"></script>
-    {% endcompress %}
+    {% include 'initjs.html' %}
+{#    {% endcompress %}#}
 {% block scripts %}{% endblock %}
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="new-css/ie/v8.css"/><![endif]-->
