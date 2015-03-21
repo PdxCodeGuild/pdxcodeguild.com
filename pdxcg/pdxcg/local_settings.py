@@ -6,6 +6,8 @@ DATABASE_PATH = os.path.join(PROJECT_PATH, 'backup_pdxdjango.db')
 TEMPLATES = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates'))
 STATIC_DIRS = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'static'))
 
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 DATABASES = {
     'default': {
