@@ -41,7 +41,9 @@
 	#banner {
 		height: 24em;
 	}
-
+.banner-after-div {
+    padding-top: 69px;
+}
 /* Wrapper */
 
 	.wrapper {
