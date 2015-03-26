@@ -728,14 +728,14 @@ input[type="button"].small,
     z-index: 1;
     top: 0;
     left: 0;
-    background: rgba(75, 160, 186, 1);
-    background: -moz-linear-gradient(left, rgba(75, 160, 186, 1) 0%, rgba(0, 0, 0, 0) 100%),;
-    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(75, 160, 186, 1)), color-stop(100%, rgba(0, 0, 0, 0)));
-    background: -webkit-linear-gradient(left, rgba(75, 160, 186, 1) 0%, rgba(0, 0, 0, 0) 100%);
-    background: -o-linear-gradient(left, rgba(75, 160, 186, 1) 0%, rgba(0, 0, 0, 0) 100%);
-    background: -ms-linear-gradient(left, rgba(75, 160, 186, 1) 0%, rgba(0, 0, 0, 0) 100%);
-    background: linear-gradient(to right, rgba(75, 160, 186, 1) 0%, rgba(0, 0, 0, 0) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4ba0ba', endColorstr='#000000', GradientType=1);
+    background: rgba(0, 0, 0, 0.7);
+    /*background: -moz-linear-gradient(left, rgba(75, 160, 186, 1) 0%, rgba(0, 0, 0, 0) 100%),;*/
+    /*background: -webkit-gradient(left top, right top, color-stop(0%, rgba(75, 160, 186, 1)), color-stop(100%, rgba(0, 0, 0, 0)));*/
+    /*background: -webkit-linear-gradient(left, rgba(75, 160, 186, 1) 0%, rgba(0, 0, 0, 0) 100%);*/
+    /*background: -o-linear-gradient(left, rgba(75, 160, 186, 1) 0%, rgba(0, 0, 0, 0) 100%);*/
+    /*background: -ms-linear-gradient(left, rgba(75, 160, 186, 1) 0%, rgba(0, 0, 0, 0) 100%);*/
+    /*background: linear-gradient(to right, rgba(75, 160, 186, 1) 0%, rgba(0, 0, 0, 0) 100%);*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4ba0ba', endColorstr='#000000', GradientType=1);*/
 }
 
 /*#banner header {
@@ -754,14 +754,14 @@ input[type="button"].small,
     text-align: center;
     z-index: 4;
     width: 100%;
-    padding: 10%
+    padding: 2%
 }
 
 .banner-after-div {
     text-align: center;
     font-size: 2em;
     color: #ffffff;
-    padding-top: 75px;
+    padding-top: 0px;
 }
 #banner header h2 {
     display: inline-block;
@@ -929,12 +929,11 @@ img.img-team2 {
     -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
 }
-
 .img-logo {
     float: left;
     position: absolute;
-    left: 11%;
-    top: 84%;
+    left: 3%;
+    top: 77%;
     z-index: 2;
     width: 9%;
 }

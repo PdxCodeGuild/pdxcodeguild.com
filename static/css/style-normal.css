@@ -42,7 +42,7 @@
 		height: 24em;
 	}
 .banner-after-div {
-    padding-top: 69px;
+    padding-top: 0;
 }
 /* Wrapper */
 
@@ -65,11 +65,3 @@
 		#footer .container {
 			margin-bottom: 1em;
 		}
-
-
-.img-logo {
-    left: 10%;
-    top: 84%;
-    z-index: 2;
-    width: 11%;
-}
