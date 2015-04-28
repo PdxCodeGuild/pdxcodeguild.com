@@ -7,8 +7,8 @@ import stripe
 from django.conf import settings
 from django.template.loader import render_to_string
 
-NEXT_DAY_CLASS_DATE = 'April 6th'
-NEXT_NIGHT_CLASS_DATE = 'March 16th'
+NEXT_DAY_CLASS_DATE = 'June 15th'
+NEXT_NIGHT_CLASS_DATE = 'June 1st'
 
 
 def index(request):

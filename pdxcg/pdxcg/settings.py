@@ -143,6 +143,8 @@ ZINNIA_SPAM_CHECKER_BACKENDS = (
 
 RECAPTCHA_PRIVATE_KEY = 'SKDJFGNSLKDJF'
 RECAPTCHA_PUBLIC_KEY = 'SFDJSODFJ'
+
+
 try:
     from local_settings import *
 except ImportError:
