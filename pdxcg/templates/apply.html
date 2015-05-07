@@ -154,7 +154,7 @@
 
                                 </div>
                             </div>
-                        </div>
+
 
 
                         <div id='show-if-graduate-yes' style='display:none'>
@@ -179,7 +179,7 @@
                                 </div>
                             </div>
                         </div>
-
+</div>
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="phone">Phone Number</label>
 
@@ -300,14 +300,6 @@
                                     </li>
                                 </ul>
                             </ul>
-                            <p>PDX Code guild does not ask students to do brain teasers or achieve a level of
-                                programming
-                                proficiency on their own as an admission requirement. We are confident in our ability to
-                                determine if a student fulfills the above requirements, and is capable of succeeding in
-                                the
-                                program through the process of filling out the application, writing the essay, and
-                                through
-                                an informal interview.</p>
                         </div>
 
 
@@ -525,17 +517,75 @@
                                 learn those skills, and why you want to learn code.</label>
 
                             <div class="col-md-4">
-                                <textarea class="form-control" id="essay" name="essay"></textarea>
+                                <textarea class="form-control" id="essay" name="essay" style="min-height: 200px;"></textarea>
                             </div>
                         </div>
 
-                        <!-- File Button -->
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="resume">Please attach a copy of your resume and
                                 link to any previous programming or web design.</label>
 
                             <div class="col-md-4">
                                 <input id="resume" name="resume" class="input-file" type="file">
+                            </div>
+                        </div>
+
+                            <legend> </legend>
+                            <div class="form-group">
+                            <label class="col-md-4 control-label" for="class_to_enroll">I intend to enroll in the following program:</label>
+
+                            <div class="col-md-4">
+                                <div class="radio">
+                                    <label for="education-0">
+                                        <input type="radio" name="class_to_enroll" id="class_to_enroll-0"
+                                               value="high-school">
+                                        Python–Based Jr Dev Bootcamp -  12 week course
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="education-1">
+                                        <input type="radio" name="class_to_enroll" id="class_to_enroll-1"
+                                               value="ged">
+                                        Python–Based Jr Dev Bootcamp – 16 week course
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <legend>Application deadlines:</legend>
+                        <p>Class start date: <br>
+                        January 5, 2015 <br></p>
+                        <p>To be eligible for above class start date, application must be received by: <br>
+                        December 23, 2014 <br></p>
+                        <p>To be eligible for $3300 tuition, application must be received by  Dec. 10 2014</p>
+                        <legend> </legend>
+                        <p>I certify that all statements on this application and accompanying documents are complete and
+                         true. I also understand that if I am admitted and do not enroll for the “start date” to which I
+                          am admitted, I may need to reapply for admission. I understand that submitted materials will
+                          not be returned or duplicated.</p>
+
+
+                    <div class="form-group">
+                            <label class="col-md-4 control-label" for="full-name">Electronic Signature</label>
+
+                            <div class="col-md-2">
+                                <input id="name" name="full-name" type="text" placeholder="Full Name"
+                                       class="first-name form-control input-md">
+                            </div>
+
+                            <div class="col-md-2">
+                                <input id="name" name="date" type="text" placeholder="mm/dd/yyyy"
+                                       class="first-name form-control input-md">
+                            </div>
+                          </div>
+                        <legend> </legend>
+                       <div class="form-group">
+                            <label class="col-md-4 control-label" for="extra-info">Is there any other information you would like to provide that might impact your ability to
+                        benefit from the program (ie. Anything that would prohibit you from keeping up in a fast-paced,
+                        immersive program or anything that would deter companies from hiring you when you graduate)?</label>
+
+                            <div class="col-md-4">
+                                <textarea class="form-control" id="extra-info" name="extra-info" style="min-height: 200px;"></textarea>
                             </div>
                         </div>
 
@@ -547,7 +597,6 @@
     </section>
     <script>
         $("input[name='applybefore']").click(function () {
-            //$('#show-if-apply-yes').css('display', ($(this).val() === 'Yes') ? 'block' : 'none');
             if (this.id == "applybefore-0") {
                 $("#show-if-apply-yes").show('slow')
             } else {

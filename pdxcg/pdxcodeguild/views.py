@@ -18,6 +18,10 @@ def index(request):
     return render_to_response('index.html', context_dict, context)
 
 
+def guarantee(request):
+    return render(request, 'guarantee.html')
+
+
 def about(request):
     context = RequestContext(request)
     context_dict = {}

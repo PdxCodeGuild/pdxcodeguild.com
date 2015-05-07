@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style-wide.css"/>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css"/>
 {#    {% endcompress %}#}
- {% block css %} {% endblock %}
+
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -73,7 +73,7 @@
                 <div class="row collapse-at-2">
                     <section class="6u" style="text-align: center">
                         <ul class="links">
-                            <li><a href="{% url 'devbootcamp' %}">Jr Dev Bootcamp</a></li>
+                            <li><a href="{% url 'devbootcamp' %}">Dev Bootcamp</a></li>
                             <li><a href="{% url 'evening_bootcamp' %}">Evening Dev Bootcamp</a></li>
                             <li><a href="{% url 'apply' %}">Apply</a></li>
                             <li><a href="{% url 'team' %}">Team</a></li>
