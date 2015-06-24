@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/skel.css"/>
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css"/>
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style-wide.css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css"/>
 {#    {% endcompress %}#}
 
     <script>
@@ -34,15 +34,15 @@
     </script>
 {#    {% compress js %}#}
     <!--[if lte IE 8]>
-    <script src="css/ie/html5shiv.js"></script><![endif]-->
-    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}css/ie/html5shiv.js"></script><![endif]-->
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}fluent_comments/js/ajaxcomments.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}pybb/js/jquery.formset.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}pybb/js/pybbjs.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.stringToSlug.js"></script>
-    <script src="{{ STATIC_URL }}js/jquery.dropotron.min.js"></script>
-    <script src="{{ STATIC_URL }}js/skel.min.js"></script>
-    <script src="{{ STATIC_URL }}js/skel-layers.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dropotron.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/skel.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/skel-layers.min.js"></script>
     {% include 'initjs.html' %}
 {#    {% endcompress %}#}
 {% block scripts %}{% endblock %}

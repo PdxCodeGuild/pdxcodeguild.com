@@ -62,6 +62,7 @@
 			padding: 20px;
 		}
 
+
 /* Wrapper */
 
 	.wrapper {
@@ -84,6 +85,25 @@
 .img-logo {
     left: 40%;
     top: 67%;
-    z-index: 2;
+    z-index: -2;
     width: 23%;
 }
+
+/*.banner-after-div {*/
+    /**/
+/*}*/
+.banner-font-a {
+    font-size: 2em;
+}
+
+/*.banner-font-b {*/
+
+/*}*/
+
+.banner-font-c {
+    font-size: .9em;
+}
+
+/*.banner-font-d {*/
+
+/*}*/

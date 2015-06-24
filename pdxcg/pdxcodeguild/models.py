@@ -79,3 +79,63 @@ class SkillAssessment(models.Model):
     what_do_you_hope_we_cover = models.TextField(max_length=2000)
     what_skills_do_you_want_to_acquire = models.TextField(max_length=2000)
     projects_applications_in_mind = models.TextField(max_length=2000)
+
+
+class IntroSurvey(models.Model):
+    # regex for valid international phone number
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
+                                 message="Phone number must be entered in the format: '+999999999'. Up to 15 digits \
+                                 allowed.")
+
+    first_name = models.CharField(max_length=255)
+    middle_initial = models.CharField(max_length=1)
+    last_name = models.CharField(max_length=255)
+    date_of_birth = models.CharField(max_length=255)
+    street_address = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
+    zip = models.IntegerField(max_length=20)
+    email = models.EmailField()
+    phone_number = models.CharField(validators=[phone_regex], blank=True, max_length=15)
+    programming_knowledge = models.TextField(max_length=2000)
+    self_study = models.TextField(max_length=2000)
+    mtt_530_to_830 = models.IntegerField(max_length=1)
+    ttf_530_to_830 = models.IntegerField(max_length=1)
+    mtt_1100_to_0200 = models.IntegerField(max_length=1)
+    ss_1100_to_0200 = models.IntegerField(max_length=1)
+    s_1100_to_0200 = models.IntegerField(max_length=1)
+
+    def __unicode__(self):
+            return self.first_name
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
