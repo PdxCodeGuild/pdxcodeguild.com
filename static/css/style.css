@@ -754,7 +754,8 @@ input[type="button"].small,
     text-align: center;
     z-index: 4;
     width: 100%;
-    padding: 2%
+    padding: 2%;
+    top: 12em;
 }
 
 .banner-after-div {
