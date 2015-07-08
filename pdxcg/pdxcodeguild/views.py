@@ -9,8 +9,8 @@ from django.template.loader import render_to_string
 from .models import IntroSurvey
 from django.core.mail import EmailMultiAlternatives
 
-NEXT_DAY_CLASS_DATE = 'June 15th'
-NEXT_NIGHT_CLASS_DATE = 'June 1st'
+NEXT_DAY_CLASS_DATE = 'July 27th'
+NEXT_NIGHT_CLASS_DATE = 'August 10th'
 
 
 def index(request):
