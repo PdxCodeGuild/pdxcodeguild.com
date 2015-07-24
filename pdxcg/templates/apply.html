@@ -2,6 +2,9 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load i18n sekizai_tags %}
+{% block scripts %}
+{% endblock %}
+
 {% block body_block %}
     <section class="wrapper style1">
         <div class="container">
@@ -31,7 +34,7 @@
                     {% csrf_token %}
                     <fieldset>
 
-                        <legend>Sign up for Intro to Programming</legend>
+                        <legend>Sign up for PDX Code Guild</legend>
 
                         <span class="payment-errors"></span>
 
@@ -56,7 +59,7 @@
                             <label class="col-md-4 control-label" for="dob">Date of Birth</label>
 
                             <div class="col-md-2">
-                                <input id="email" name="dob" type="text" placeholder="MM/YYYY"
+                                <input id="dob" name="dob" type="text" placeholder="MM/YYYY"
                                        class="dob form-control input-md">
 
                             </div>
@@ -66,7 +69,7 @@
                             <label class="col-md-4 control-label" for="address">Street Address</label>
 
                             <div class="col-md-5">
-                                <input id="email" name="address" type="text" placeholder="Address"
+                                <input id="address" name="address" type="text" placeholder="Address"
                                        class="address form-control input-md">
                             </div>
                         </div>
@@ -75,15 +78,15 @@
                             <label class="col-md-4 control-label" for="email"></label>
 
                             <div class="col-md-2">
-                                <input id="email" name="city" type="text" placeholder="City"
+                                <input id="city" name="city" type="text" placeholder="City"
                                        class="city form-control input-md">
                             </div>
                             <div class="col-md-1">
-                                <input id="email" name="state" type="text" placeholder="State"
+                                <input id="state" name="state" type="text" placeholder="State"
                                        class="state form-control input-md">
                             </div>
                             <div class="col-md-2">
-                                <input id="email" name="zip" type="text" placeholder="Zip"
+                                <input id="zip" name="zip" type="text" placeholder="Zip"
                                        class="zip form-control input-md">
                             </div>
                         </div>
@@ -95,136 +98,549 @@
 
                             <div class="col-md-4">
                                 <label class="radio-inline" for="applybefore-0">
-                                    <input type="radio" name="yes" id="applybefore-0" value="Yes">
+                                    <input type="radio" name="applybefore" id="applybefore-0" value="Yes">
                                     Yes
                                 </label>
-                                <label class="radio-inline" for="radios-1">
-                                    <input type="radio" name="no" id="applybefore-1" value="No">
+                                <label class="radio-inline" for="applybefore-1">
+                                    <input type="radio" name="applybefore" id="applybefore-1" value="No">
+                                    No
+                                </label>
+
+                            </div>
+                        </div>
+
+                        <div id='show-if-apply-yes' style='display:none'>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="when">When?</label>
+
+                                <div class="col-md-2">
+                                    <input id="when" name="when" type="text" placeholder="MM/YYYY"
+                                           class="phone form-control input-md">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="attendbefore">Have you ever attended this school
+                                before?</label>
+
+                            <div class="col-md-4">
+                                <label class="radio-inline" for="attendbefore-0">
+                                    <input type="radio" name="attendbefore" id="attendbefore-0" value="Yes">
+                                    Yes
+                                </label>
+                                <label class="radio-inline" for="attendbefore-1">
+                                    <input type="radio" name="attendbefore" id="attendbefore-1" value="No">
+                                    No
+                                </label>
+
+                            </div>
+                        </div>
+
+                        <div id='show-if-attend-yes' style='display:none'>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="graduate">Did you graduate?</label>
+
+                                <div class="col-md-4">
+                                    <label class="radio-inline" for="graduate-0">
+                                        <input type="radio" name="graduate" id="graduate-0" value="Yes">
+                                        Yes
+                                    </label>
+                                    <label class="radio-inline" for="graduate-1">
+                                        <input type="radio" name="graduate" id="graduate-1" value="No">
+                                        No
+                                    </label>
+
+                                </div>
+                            </div>
+
+
+
+                        <div id='show-if-graduate-yes' style='display:none'>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="when-grad">When?</label>
+
+                                <div class="col-md-2">
+                                    <input id="email" name="when" type="text" placeholder="MM/YYYY"
+                                           class="form-control input-md">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div id='show-if-graduate-no' style='display:none'>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="reasonleft">What was the reason you
+                                    left?</label>
+
+                                <div class="col-md-5">
+                                    <textarea class="form-control" id="reasonleft" name="reasonleft"></textarea>
+                                </div>
+                            </div>
+                        </div>
+</div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="phone">Phone Number</label>
+
+                            <div class="col-md-5">
+                                <input id="phone" name="phone" type="text" placeholder="" class="form-control input-md">
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="messagephone">Message Phone Number</label>
+
+                            <div class="col-md-5">
+                                <input id="messagephone" name="messagephone" type="text" placeholder=""
+                                       class="form-control input-md">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="cellnumber">Cell Phone Number</label>
+
+                            <div class="col-md-5">
+                                <input id="cellnumber" name="cellnumber" type="text" placeholder=""
+                                       class="form-control input-md">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="email">Email</label>
+
+                            <div class="col-md-5">
+                                <input id="email" name="email" type="text" placeholder="" class="form-control input-md"
+                                       required="">
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="citizen">Are you a U.S Citizen</label>
+
+                            <div class="col-md-4">
+                                <label class="radio-inline" for="citizen-0">
+                                    <input type="radio" name="citizen" id="citizen-0" value="Yes">
+                                    Yes
+                                </label>
+                                <label class="radio-inline" for="citizen-1">
+                                    <input type="radio" name="citizen" id="citizen-1" value="No">
                                     No
                                 </label>
                             </div>
                         </div>
-
-                        ##########################################################
-                        ##########################################################
-                        ##########################################################
+                        <legend>Emergency Contact Information</legend>
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="phone">Phone Number</label>
+                            <label class="col-md-4 control-label" for="ecname">Name</label>
 
-                            <div class="col-md-4">
-                                <input id="email" name="phone" type="text" placeholder=""
-                                       class="phone form-control input-md">
-
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="address">Address</label>
-
-                            <div class="col-md-4">
-                                <input id="address" name="address" type="text" placeholder=""
-                                       class="address form-control input-md">
-
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="city">City</label>
-
-                            <div class="col-md-4">
-                                <input id="city" name="city" type="text" placeholder=""
-                                       class="city form-control input-md"
-                                       required="">
-
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="state">State</label>
-
-                            <div class="col-md-1">
-                                <input id="city" name="state" type="text" placeholder=""
-                                       class="state form-control input-md"
-                                       required="">
-
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="zip">Zip Code</label>
-
-                            <div class="col-md-4">
-                                <input id="zip" name="zip" type="text" placeholder="" class="zip form-control input-md"
-                                       required="">
-
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="Goals">What are your goals for this
-                                class?</label>
-
-                            <div class="col-md-4">
-                                <textarea class="goals form-control" id="Goals" name="goals"></textarea>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="card">Card Number</label>
-
-                            <div class="col-md-4">
-                                <input id="card" name="card" type="text" placeholder=""
-                                       class="card-number form-control input-md">
-
+                            <div class="col-md-5">
+                                <input id="ecname" name="ecname" type="text" placeholder=""
+                                       class="ecname form-control input-md">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="cvc">CVC</label>
+                            <label class="col-md-4 control-label" for="ecaddress">Street Address</label>
 
-                            <div class="col-md-1">
-                                <input id="cvc" name="cvc" type="text" placeholder=""
-                                       class="card-cvc form-control input-md">
-
+                            <div class="col-md-5">
+                                <input id="ecaddress" name="ecaddress" type="text" placeholder=""
+                                       class="ecaddress form-control input-md">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="month">Expiration (MM/YYYY)</label>
 
-                            <div class="col-md-1">
-                                <input id="month" name="month" type="text" placeholder="MM"
-                                       class="card-expiry-month form-control input-md">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="citystatezip"></label>
+
+                            <div class="col-md-2">
+                                <input id="eccity" name="eccity" type="text" placeholder="City"
+                                       class="eccity form-control input-md">
                             </div>
                             <div class="col-md-1">
-                                <input id="year" name="year" type="text" placeholder="YYYY"
-                                       class="card-expiry-year form-control input-md">
-
+                                <input id="ecstate" name="ecstate" type="text" placeholder="State"
+                                       class="ecstate form-control input-md">
+                            </div>
+                            <div class="col-md-2">
+                                <input id="eczip" name="eczip" type="text" placeholder="Zip"
+                                       class="eczip form-control input-md">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="paymentbutton"></label>
+                            <label class="col-md-4 control-label" for="ecphone">Phone Number</label>
 
-                            <div class="col-md-4">
-                                <button type="submit" id="paymentbutton" name="paymentbutton"
-                                        class="submit-button button">Submit Payment
-                                </button>
+                            <div class="col-md-5">
+                                <input id="ecphone" name="ecphone" type="text" placeholder=""
+                                       class="form-control input-md">
+
                             </div>
                         </div>
+
+                        <legend>Admission requirements</legend>
+                        <div class="form-group">
+                            <ul style="list-style-type: square">
+                                <li>Must be at least age 18</li>
+                                <li>Complete the application form, including personal essay resume and links to any
+                                    previous
+                                    web or programming work.
+                                </li>
+                                <li>Complete a personal interview with the director and an instructor</li>
+                                <li>Demonstrate aptitude for technical success</li>
+                                <li>Provide evidence of potential academic success:</li>
+                                <ul style="list-style-type: circle; padding-left: 40px !important;">
+                                    <li>hold an associate's or equivalent degree <br></li>
+                                    or
+                                    <li>hold a high-school diploma(or equivalent)<br>
+                                        and show other evidence of scholastic mind-set
+                                    </li>
+                                </ul>
+                            </ul>
+                        </div>
+
+
+                        <legend>Education</legend>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="education">Secondary Education</label>
+
+                            <div class="col-md-4">
+                                <div class="radio">
+                                    <label for="education-0">
+                                        <input type="radio" name="education" id="education-0"
+                                               value="high-school">
+                                        High School Graduate
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="education-1">
+                                        <input type="radio" name="education" id="education-1"
+                                               value="ged">
+                                        GED
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="education-2">
+                                        <input type="radio" name="education" id="education-2"
+                                               value="other">
+                                        Other (Describe bellow)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id='show-if-edu-other' style='display:none'>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="eduother">Other Education</label>
+
+                                <div class="col-md-5">
+                                    <textarea class="form-control" id="eduother" name="eduother"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="mathlevel">Highest level of math you’ve
+                                completed</label>
+
+                            <div class="col-md-4">
+                                <textarea class="form-control" id="mathlevel" name="mathlevel"></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="whenwhere">When/Where</label>
+
+                            <div class="col-md-4">
+                                <textarea class="form-control" id="whenwhere" name="whenwhere"></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="writing">Highest level of writing you’ve
+                                completed</label>
+
+                            <div class="col-md-4">
+                                <textarea class="form-control" id="writing" name="writing"></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="writing-whenwhere">When/Where</label>
+
+                            <div class="col-md-4">
+                                <textarea class="form-control" id="writing-whenwhere"
+                                          name="writing-whenwhere"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="postsecondary">I have completed the following
+                                post secondary education (Check all that apply)</label>
+
+                            <div class="col-md-4">
+                                <div class="checkbox">
+                                    <label for="postsecondary-0">
+                                        <input type="checkbox" name="postsecondary" id="postsecondary-0"
+                                               value="Have not attended college">
+                                        Have not attended college
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label for="postsecondary-1">
+                                        <input type="checkbox" name="postsecondary" id="postsecondary-1"
+                                               value="Some college">
+                                        Some college
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label for="postsecondary-2">
+                                        <input type="checkbox" name="postsecondary" id="postsecondary-2"
+                                               value="Associate degree">
+                                        Associate degree
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label for="postsecondary-3">
+                                        <input type="checkbox" name="postsecondary" id="postsecondary-3"
+                                               value="Bachelor degree">
+                                        Bachelor degree
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label for="postsecondary-4">
+                                        <input type="checkbox" name="postsecondary" id="postsecondary-4"
+                                               value="Master degree">
+                                        Master degree
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label for="postsecondary-5">
+                                        <input type="checkbox" name="postsecondary" id="postsecondary-5"
+                                               value="Doctorate or professional degree">
+                                        Doctorate or professional degree
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label for="postsecondary-6">
+                                        <input type="checkbox" name="postsecondary" id="postsecondary-6"
+                                               value="Certificate program at community college">
+                                        Certificate program at community college
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label for="postsecondary-7">
+                                        <input type="checkbox" name="postsecondary" id="postsecondary-7"
+                                               value="Private career school">
+                                        Private career school
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label for="postsecondary-8">
+                                        <input type="checkbox" name="postsecondary" id="postsecondary-8"
+                                               value="Apprenticeship training">
+                                        Apprenticeship training
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label for="postsecondary-9">
+                                        <input type="checkbox" name="postsecondary" id="postsecondary-9"
+                                               value="Other (Describe below)">
+                                        Other (Describe below)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id='show-if-postsecond-other' style='display:none'>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="postsecondother">Other Post Secondary
+                                    Education</label>
+
+                                <div class="col-md-5">
+                                    <textarea class="form-control" id="postsecondother"
+                                              name="postsecondother"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="institutionattended">List the name, location and
+                                course of study of post secondary institution(s) you attended:</label>
+
+                            <div class="col-md-4">
+                                <textarea class="form-control" id="institutionattended"
+                                          name="institutionattended"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="applyreason">I am pursuing admission for the
+                                following reason (Choose one)</label>
+
+                            <div class="col-md-4">
+                                <div class="checkbox">
+                                    <label for="applyreason-0">
+                                        <input type="checkbox" name="applyreason" id="applyreason-0"
+                                               value="Career preparation and employment">
+                                        Career preparation and employment
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label for="applyreason-1">
+                                        <input type="checkbox" name="applyreason" id="applyreason-1"
+                                               value="Advanced training / Continuing education">
+                                        Advanced training / Continuing education
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label for="applyreason-2">
+                                        <input type="checkbox" name="applyreason" id="applyreason-2"
+                                               value="Personal development / Self improvement">
+                                        Personal development / Self improvement
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <legend>Admissions Essay</legend>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="essay">Please write a short essay that describes
+                                your current skill level in IT, what experiences or sources you've used in the past to
+                                learn those skills, and why you want to learn code.</label>
+
+                            <div class="col-md-4">
+                                <textarea class="form-control" id="essay" name="essay" style="min-height: 200px;"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="resume">Please attach a copy of your resume and
+                                link to any previous programming or web design.</label>
+
+                            <div class="col-md-4">
+                                <input id="resume" name="resume" class="input-file" type="file">
+                            </div>
+                        </div>
+
+                            <legend> </legend>
+                            <div class="form-group">
+                            <label class="col-md-4 control-label" for="class_to_enroll">I intend to enroll in the following program:</label>
+
+                            <div class="col-md-4">
+                                <div class="radio">
+                                    <label for="education-0">
+                                        <input type="radio" name="class_to_enroll" id="class_to_enroll-0"
+                                               value="high-school">
+                                        Python–Based Jr Dev Bootcamp -  12 week course
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="education-1">
+                                        <input type="radio" name="class_to_enroll" id="class_to_enroll-1"
+                                               value="ged">
+                                        Python–Based Jr Dev Bootcamp – 16 week course
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <legend>Application deadlines:</legend>
+                        <p>Class start date: <br>
+                        January 5, 2015 <br></p>
+                        <p>To be eligible for above class start date, application must be received by: <br>
+                        December 23, 2014 <br></p>
+                        <p>To be eligible for $3300 tuition, application must be received by  Dec. 10 2014</p>
+                        <legend> </legend>
+                        <p>I certify that all statements on this application and accompanying documents are complete and
+                         true. I also understand that if I am admitted and do not enroll for the “start date” to which I
+                          am admitted, I may need to reapply for admission. I understand that submitted materials will
+                          not be returned or duplicated.</p>
+
+
+                    <div class="form-group">
+                            <label class="col-md-4 control-label" for="full-name">Electronic Signature</label>
+
+                            <div class="col-md-2">
+                                <input id="name" name="full-name" type="text" placeholder="Full Name"
+                                       class="first-name form-control input-md">
+                            </div>
+
+                            <div class="col-md-2">
+                                <input id="name" name="date" type="text" placeholder="mm/dd/yyyy"
+                                       class="first-name form-control input-md">
+                            </div>
+                          </div>
+                        <legend> </legend>
+                       <div class="form-group">
+                            <label class="col-md-4 control-label" for="extra-info">Is there any other information you would like to provide that might impact your ability to
+                        benefit from the program (ie. Anything that would prohibit you from keeping up in a fast-paced,
+                        immersive program or anything that would deter companies from hiring you when you graduate)?</label>
+
+                            <div class="col-md-4">
+                                <textarea class="form-control" id="extra-info" name="extra-info" style="min-height: 200px;"></textarea>
+                            </div>
+                        </div>
+
                     </fieldset>
                 </form>
 
             </div>
         </div>
     </section>
+    <script>
+        $("input[name='applybefore']").click(function () {
+            if (this.id == "applybefore-0") {
+                $("#show-if-apply-yes").show('slow')
+            } else {
+                $("#show-if-apply-yes").hide('slow')
+            }
+        });
 
-{% endblock %}
+        $("input[name='attendbefore']").click(function () {
+            if (this.id == "attendbefore-0") {
+                $("#show-if-attend-yes").show('slow')
+            } else {
+                $("#show-if-attend-yes").hide('slow')
+            }
+        });
+
+        $("input[name='graduate']").click(function () {
+            if (this.id == "graduate-0") {
+                $("#show-if-graduate-no").hide('slow')
+                $("#show-if-graduate-yes").show('slow')
+            } else {
+                $("#show-if-graduate-yes").hide('slow')
+            }
+            if (this.id == "graduate-1") {
+                $("#show-if-graduate-yes").hide('slow')
+                $("#show-if-graduate-no").show('slow')
+            } else {
+                $("#show-if-graduate-no").hide('slow')
+            }
+        });
+
+        $("input[name='education']").click(function () {
+            if (this.id == "education-2") {
+                $("#show-if-edu-other").show('slow')
+            } else {
+                $("#show-if-edu-other").hide('slow')
+            }
+        });
+
+        $("input[name='postsecondary']").click(function () {
+            if (this.id == "postsecondary-9") {
+                $("#show-if-postsecond-other").toggle('slow')
+            }
+        });
+    </script>
+{% endblock %}graduate
 
 

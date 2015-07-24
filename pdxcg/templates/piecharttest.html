@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load nvd3_tags %}
+
+{% block body_block %}
+
+<section class="wrapper style1">
+<div class="container">
+<div id="content">
+
+
+
+    {% include_chart_jscss %}
+    {% load_chart charttype chartdata chartcontainer extra %}
+
+    <h1>Days for Intro class</h1>
+    {% include_container chartcontainer 400 600 %}
+
+
+</div>
+</div>
+</section>
+{% endblock %}

@@ -1,4 +1,4 @@
-from models import StudentIntake, NewStudentApplication, SkillAssessment
+from models import StudentIntake, NewStudentApplication, SkillAssessment, IntroSurvey
 from forms import StudentIntakeForm
 from django.contrib import admin
 
@@ -20,6 +20,11 @@ class StudentIntakeAdmin(admin.ModelAdmin):
 class SkillAssessmentAdmin(admin.ModelAdmin):
     list_display = ['name', 'instructor_name', 'date']
 
+
+class IntroSurveyAdmin(admin.ModelAdmin):
+    list_display = ['first_name', 'last_name']
+
 admin.site.register(StudentIntake, StudentIntakeAdmin)
 admin.site.register(NewStudentApplication)
 admin.site.register(SkillAssessment, SkillAssessmentAdmin)
+admin.site.register(IntroSurvey, IntroSurveyAdmin)

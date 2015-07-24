@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+<section class="wrapper style1">
+<div class="container">
+<div id="content">
+<form action="/intro_scholarship/" method="POST" id="survey" class="form-horizontal">
+{% csrf_token %}
+<fieldset>
+<p>Thank you for entering our drawing for our Intro To Programming class during the Act-W Conference.  Thanks to a generous sponsor, we are able to extend scholarships to you and 39 other women.</p>
+
+<p>We are now working to set class times.   Each class accommodates up to 12 students, so we will offer several class times. We will also customize the content somewhat for each class.</p>
+<div class="line-separator"></div>
+<h4>To pre-resister please complete the following form:</h4>
+
+
+<div class="form-group">
+<label class="col-md-4 control-label" for="name">Name</label>
+
+<div class="col-md-2">
+<input id="name" name="first-name" type="text" placeholder="First"
+class="first-name form-control input-md">
+</div>
+<div class="col-md-1">
+<input id="name" name="mi" type="text" placeholder="MI"
+class="mi form-control input-md">
+</div>
+<div class="col-md-2">
+<input id="name" name="last-name" type="text" placeholder="Last"
+class="last-name form-control input-md">
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-4 control-label" for="address">Street Address</label>
+
+<div class="col-md-5">
+<input id="address" name="address" type="text" placeholder="Address"
+class="address form-control input-md">
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-4 control-label" for="email"></label>
+
+<div class="col-md-2">
+<input id="city" name="city" type="text" placeholder="City"
+class="city form-control input-md">
+</div>
+<div class="col-md-1">
+<input id="state" name="state" type="text" placeholder="State"
+class="state form-control input-md">
+</div>
+<div class="col-md-2">
+<input id="zip" name="zip" type="text" placeholder="Zip"
+class="zip form-control input-md">
+</div>
+</div>
+<div class="form-group">
+<label class="col-md-4 control-label" for="dob">Date of Birth</label>
+
+<div class="col-md-2">
+<input id="dob" name="dob" type="text" placeholder="MM/DD/YYYY"
+class="dob form-control input-md">
+
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-4 control-label" for="phone">Phone Number</label>
+<div class="col-md-5">
+<input id="phone" name="phone" type="text" placeholder="(555) 555-5555" class="form-control input-md">
+
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-4 control-label" for="email">Email</label>
+<div class="col-md-5">
+<input id="email" name="email" type="text"  class="form-control input-md">
+
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-4 control-label" for="knowledge-level">What is your current level of programming knowledge?</label>
+<div class="col-md-5">
+<textarea class="form-control" id="knowledge-level" name="knowledge-level"></textarea>
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-4 control-label" for="knowledge-level">Have you done any self-study or actual programming, if so, please describe.</label>
+<div class="col-md-5">
+<textarea class="form-control" id="knowledge-level" name="self-study"></textarea>
+</div>
+</div>
+<div class="line-separator"></div>
+<h4>What schedule would work for you to attend the Intro to Programming class?</h4>
+
+Please rank 0-5<br>
+0 = can’t make it<br>
+5= this is the best time for me
+<div class="line-separator"></div>
+<h4>Week nights for two weeks:</h4>
+<div class="form-group">
+<label class="col-md-4 control-label" for="mtt-530-830">Monday, Tuesday and Thursday 5:30-8:30</label>
+<div class="col-md-2">
+<input id="mtt-530-830" name="mtt-530-830" type="text" placeholder="0-5" class="form-control input-md">
+
+</div>
+</div>
+
+
+<div class="form-group">
+<label class="col-md-4 control-label" for="ttf-530-830">Tuesday, Thursday and Friday 5:30-8:30</label>
+<div class="col-md-2">
+<input id="ttf-530-830" name="ttf-530-830" type="text" placeholder="0-5" class="form-control input-md">
+
+</div>
+</div>
+<div class="line-separator"></div>
+<h4>Week days for two weeks:</h4>
+<div class="form-group">
+<label class="col-md-4 control-label" for="mtt-1100-200">Monday, Tuesday and Thursday 11:00-2:00</label>
+<div class="col-md-2">
+<input id="mtt-1100-200" name="mtt-1100-200" type="text" placeholder="0-5" class="form-control input-md">
+
+</div>
+</div>
+<div class="line-separator"></div>
+<h4>Weekends<br>
+One weekend:</h4>
+
+<div class="form-group">
+<label class="col-md-4 control-label" for="ss-1100-200">Saturday and Sunday 11:00-2:00</label>
+<div class="col-md-2">
+<input id="ss-1100-200" name="ss-1100-200" type="text" placeholder="0-5" class="form-control input-md">
+
+</div>
+</div>
+
+<h4>Two Weekends:</h4>
+<div class="form-group">
+<label class="col-md-4 control-label" for="s-1100-200">Saturdays 11:00-2:00</label>
+<div class="col-md-2">
+<input id="s-1100-200" name="s-1100-200" type="text" placeholder="0-5" class="form-control input-md">
+
+</div>
+</div>
+<div class="line-separator"></div>
+
+<div class="form-group">
+<label class="col-md-4 control-label" for="submit"></label>
+<div class="col-md-4">
+<input type="submit" value="Submit" class="button">
+</div>
+</div>
+
+</fieldset>
+</form>
+
+</div>
+</div>
+</section>
+{% endblock %}

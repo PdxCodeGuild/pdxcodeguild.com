@@ -11,9 +11,7 @@
 		line-height: 1.5em;
 	}
 
-.img-logo {
-    left: 10%;
-    top: 84%;
-    z-index: 2;
-    width: 10%;
+
+.banner-after-div {
+    padding-top: 0;
 }

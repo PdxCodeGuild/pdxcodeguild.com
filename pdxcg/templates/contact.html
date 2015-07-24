@@ -2,6 +2,37 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load i18n sekizai_tags %}
+{% block css %}
+<style>
+      #map-canvas {
+        width: 500px;
+        height: 400px;
+      }
+    </style>
+{% endblock %}
+{% block scripts %}
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+      function initialize() {
+        var myLatlng = new google.maps.LatLng(45.504000, -122.675301);
+        var mapCanvas = document.getElementById('map-canvas');
+        var mapOptions = {
+          center: myLatlng,
+          zoom: 17,
+
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+
+        var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: 'PDX Code Guild'
+        });
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+{% endblock %}
 {% block body_block %}
     <section class="wrapper style1">
         <div class="container">
@@ -16,13 +47,14 @@
                         Guild</a> <br/></p>
 
                 <h3>Visit us at PDX Code Guild</h3>
-
+                    <div id="map-canvas"></div>
                 <p>2626 SW Corbett Ave<br>
                     Portland, OR 97201</p>
 
-                <p><a href="http://pdxcodeguild.com/static/img/pdxmap.png"><img src="{% static 'img/_tn-pdxmap.png' %}"
-                                                                                alt=""/></a></p>
+
             </div>
         </div>
     </section>
 {% endblock %}
+
+{#          ('ChIJqcexvGsKlVQR4r3E4Dc0go0'),#}

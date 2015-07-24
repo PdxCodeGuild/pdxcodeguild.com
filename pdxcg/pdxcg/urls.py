@@ -38,10 +38,13 @@ urlpatterns = patterns('',
     url(r'^advisors/$', 'pdxcodeguild.views.advisors', name='advisors'),
     url(r'^value/$', 'pdxcodeguild.views.value', name='value'),
     url(r'^ppm/$', 'pdxcodeguild.views.ppm', name='ppm'),
+    url(r'^guarantee/$', 'pdxcodeguild.views.guarantee', name='guarantee'),
     url(r'^pythonquiz/$', 'pdxcodeguild.views.pythonquiz', name='pythonquiz'),
     url(r'^forum/', include('pybb.urls', namespace='pybb')),
     url(r'^blog/', include('zinnia.urls', namespace='zinnia'), name='blog'),
     url(r'intro_apply/','pdxcodeguild.views.intro_apply', name='introapply'),
+    url(r'intro_scholarship/','pdxcodeguild.views.intro_scholarship', name='intro_scholarship'),
+    url(r'test/','pdxcodeguild.views.piecharttest', name='test'),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 )
 

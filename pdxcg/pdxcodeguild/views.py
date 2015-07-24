@@ -6,9 +6,11 @@ from .forms import Comment, Contact, StudentIntakeForm, NewStudentApp, SkillAsse
 import stripe
 from django.conf import settings
 from django.template.loader import render_to_string
+from .models import IntroSurvey
+from django.core.mail import EmailMultiAlternatives
 
-NEXT_DAY_CLASS_DATE = 'April 6th'
-NEXT_NIGHT_CLASS_DATE = 'March 16th'
+NEXT_DAY_CLASS_DATE = 'July 27th'
+NEXT_NIGHT_CLASS_DATE = 'August 10th'
 
 
 def index(request):
@@ -16,6 +18,91 @@ def index(request):
     context_dict = {'next_night_class_date': NEXT_NIGHT_CLASS_DATE, 'next_day_class_date': NEXT_DAY_CLASS_DATE}
 
     return render_to_response('index.html', context_dict, context)
+
+
+def guarantee(request):
+    return render(request, 'guarantee.html')
+
+
+def piecharttest(request):
+    x = IntroSurvey.objects.all().values('mtt_530_to_830', 'ttf_530_to_830', 'mtt_1100_to_0200', 'ss_1100_to_0200',
+                                         's_1100_to_0200')
+    mtt_530_to_830 = []
+    ttf_530_to_830 = []
+    mtt_1100_to_0200 = []
+    ss_1100_to_0200 = []
+    s_1100_to_0200 = []
+
+    for y in x:
+        mtt_530_to_830.append(y['mtt_530_to_830'])
+        ttf_530_to_830.append(y['ttf_530_to_830'])
+        mtt_1100_to_0200.append(y['mtt_1100_to_0200'])
+        ss_1100_to_0200.append(y['ss_1100_to_0200'])
+        s_1100_to_0200.append(y['s_1100_to_0200'])
+
+    mtt_530_to_830_sum = sum(mtt_530_to_830)
+    ttf_530_to_830_sum = sum(ttf_530_to_830)
+    mtt_1100_to_0200_sum = sum(mtt_1100_to_0200)
+    ss_1100_to_0200_sum = sum(ss_1100_to_0200)
+    s_1100_to_0200_sum = sum(s_1100_to_0200)
+
+    xdata = ["Monday, Tuesday and Thursday 5:30-8:30", "Tuesday, Thursday and Friday 5:30-8:30", "Monday, Tuesday and Thursday 11:00-2:00", "Saturday and Sunday 11:00-2:00", "Saturdays 11:00-2:00"]
+    ydata = [mtt_530_to_830_sum, ttf_530_to_830_sum, mtt_1100_to_0200_sum, ss_1100_to_0200_sum, s_1100_to_0200_sum]
+    chartdata = {'x': xdata, 'y': ydata}
+    charttype = "pieChart"
+    chartcontainer = 'piechart_container'
+    data = {
+        'charttype': charttype,
+        'chartdata': chartdata,
+        'chartcontainer': chartcontainer,
+        'extra': {
+            'x_is_date': False,
+            'x_axis_format': '',
+            'tag_script_js': True,
+            'jquery_on_ready': False,
+        }
+    }
+    return render(request, 'piecharttest.html', data)
+
+
+def intro_scholarship(request):
+    if request.method == 'POST':
+        intsurv = IntroSurvey()
+        intsurv.self_study = request.POST['self-study']
+        intsurv.city = request.POST['city']
+        intsurv.ss_1100_to_0200 = request.POST['ss-1100-200']
+        intsurv.last_name = request.POST['last-name']
+        intsurv.zip = request.POST['zip']
+        intsurv.date_of_birth = request.POST['dob']
+        intsurv.ttf_530_to_830 = request.POST['ttf-530-830']
+        intsurv.s_1100_to_0200 = request.POST['s-1100-200']
+        intsurv.middle_initial = request.POST['mi']
+        intsurv.mtt_1100_to_0200 = request.POST['mtt-1100-200']
+        intsurv.mtt_530_to_830 = request.POST['mtt-530-830']
+        intsurv.phone_number = request.POST['phone']
+        intsurv.state = request.POST['state']
+        intsurv.programming_knowledge = request.POST['knowledge-level']
+        intsurv.street_address = request.POST['address']
+        intsurv.first_name = request.POST['first-name']
+        intsurv.email = request.POST['email']
+        intsurv.save()
+
+        full_name = str(intsurv.first_name) + ' ' + str(intsurv.last_name)
+        subject, from_email, to = '%s filled out the Intro Survey form' % full_name, 'forms@pdxcodeguild.com', \
+                                  'sheri.dover@gmail.com'
+        text_content = '''Name: %s
+        Phone number: %s
+        Email address: %s
+        Go to https://pdxcodeguild.com/admin to view submission.
+        ''' % (full_name, intsurv.phone_number, intsurv.email )
+        html_content = 'Full name: %s<br>Phone number: %s<br>Email address: %s<br>Go to https://pdxcodeguild.com/admin ' \
+                       'to view submission.' % (
+                           full_name, intsurv.phone_number, intsurv.email)
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+        return HttpResponseRedirect('/thanks/')
+    return render(request, 'intro_survey.html')
 
 
 def about(request):
@@ -47,8 +134,6 @@ def apply(request):
             email_address = form.cleaned_data['email_address']
             best_contact = form.cleaned_data['best_contact']
             message = form.cleaned_data['message']
-
-            from django.core.mail import EmailMultiAlternatives
 
             subject, from_email, to = '%s filled out the Interested form' % full_name, 'forms@pdxcodeguild.com', \
                                       'sheri.dover@gmail.com'
@@ -359,11 +444,13 @@ def student_comment(request):
             What can we do in the future to improve this class?: \n %s \n
             Is there any other suggestion or issues you would like to bring up?: \n %s
             ''' % (
-            name, email_address, first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth, message1,
-            message2)
+                name, email_address, first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth,
+                message1,
+                message2)
             html_content = 'Name: %s<br>Email address: %s<br>Please rate the following on a scale of 1 to 4.<br>1 = Poor, 2 = Fair, 3 = Good, 4 = Excellent<br>Depth of the Knowledge of the subject: %s<br>Presentation Skills: %s<br>Sincerity, Commitment, Regularity and Punctuality: %s<br>Syllabus Coverage: %s<br>Ability to Clarify doubts, teaching with relevant examples: %s<br>Ability to relate the course to real life situations: %s<br>Ability to generate interest: %s<br>Content and length of lectures: %s<br>Ability to command and control the class: %s<br>Overall teacher rating: %s<br>What can we do in the future to improve this class?: <br>%s <br>Is there any other suggestion or issues you would like to bring up?: <br>%s' % (
-            name, email_address, first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth, message1,
-            message2)
+                name, email_address, first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth,
+                message1,
+                message2)
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
             msg.send()

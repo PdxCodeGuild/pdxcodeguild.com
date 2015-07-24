@@ -5,7 +5,20 @@ PROJECT_PATH = os.path.abspath(PROJECT_PATH)
 DATABASE_PATH = os.path.join(PROJECT_PATH, 'backup_pdxdjango.db')
 TEMPLATES = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates'))
 STATIC_DIRS = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'static'))
+PROJECT_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), ".."),
+)
 
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_ROOT, 'components')
+
+BOWER_INSTALLED_APPS = (
+    'jquery',
+    'd3#3.3.13',
+    'nvd3#1.7.1',
+)
 
 DATABASES = {
     'default': {

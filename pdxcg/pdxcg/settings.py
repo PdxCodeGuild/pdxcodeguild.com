@@ -1,7 +1,10 @@
 import os
+
 import stripe
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
+PROJECT_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), ".."),
+)
 ADMINS = (
     ('Christopher Jones', 'chris@pdxcodeguild.com'),
 )
@@ -42,7 +45,9 @@ INSTALLED_APPS = (
     'mptt',
     'zinnia_bootstrap',
     'zinnia',
-    'captcha'
+    'captcha',
+    'djangobower',
+    'django_nvd3',
 )
 
 COMPRESS_ENABLED = False
@@ -105,6 +110,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
+    'djangobower.finders.BowerFinder',
 )
 
 PYBB_ATTACHMENT_SIZE_LIMIT = 40960 * 40960
@@ -140,6 +146,9 @@ AKISMET_API_KEY = '96824e9c0145'
 ZINNIA_SPAM_CHECKER_BACKENDS = (
     'zinnia_akismet.akismet',
 )
+
+RECAPTCHA_PRIVATE_KEY = 'SKDJFGNSLKDJF'
+RECAPTCHA_PUBLIC_KEY = 'SFDJSODFJ'
 
 
 try:
