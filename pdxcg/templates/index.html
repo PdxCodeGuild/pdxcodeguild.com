@@ -24,10 +24,11 @@
 
                         <h3 style="color: #f57b20">Upcoming Bootcamps</h3>
                         <em><strong style="color: #f57b20;">
-                            <a href="{% url 'devbootcamp' %}">{{ next_day_class_date }}:
-                                12-Week, Day</a> <br>
-                            <a href="{% url 'evening_bootcamp' %}">{{ next_night_class_date }} and September 14th: 16-Week,
-                                Evening</a></strong></em>
+                            <a href="{% url 'devbootcamp' %}">
+                                12-Week Day Bootcamp:<br>
+                                {{ next_day_class_date }}</a> <br>
+                            <a href="{% url 'evening_bootcamp' %}">16-Week Evening Bootcamp:<br>
+                                {{ next_night_class_date }} </a></strong></em>
 
                         <h3 style="color: #f57b20">Ready to start your career in technology?</h3>
 
