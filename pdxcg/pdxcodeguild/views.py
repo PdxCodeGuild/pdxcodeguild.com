@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 from .models import IntroSurvey
 from django.core.mail import EmailMultiAlternatives
 
-NEXT_DAY_CLASS_DATE = 'September 14th'
+NEXT_DAY_CLASS_DATE = 'January 5th'
 NEXT_NIGHT_CLASS_DATE = 'October 14th'
 
 
