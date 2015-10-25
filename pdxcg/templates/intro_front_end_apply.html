@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load i18n sekizai_tags %}
+{% block scripts %}
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.8.1/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+    <script type="text/javascript">
+        Stripe.setPublishableKey('{{ stripe_key }}');
+        function stripeResponseHandler(status, response) {
+            if (response.error) {
+                // re-enable the submit button
+                $('.submit-button').removeAttr("disabled");
+                // show the errors on the form
+                $(".payment-errors").html(response.error.message);
+            } else {
+                var form$ = $("#payment-form");
+                // token contains id, last4, and card type
+                var token = response['id'];
+                // insert the token into the form so it gets submitted to the server
+                form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
+                // and submit
+                form$.get(0).submit();
+            }
+        }
+
+        $(document).ready(function () {
+            $("#payment-form").submit(function (event) {
+                // disable the submit button to prevent repeated clicks
+                $('.submit-button').attr("disabled", "disabled");
+                var chargeAmount = 45000; //amount you want to charge, in cents. 1000 = $10.00, 2000 = $20.00 ...
+                // createToken returns immediately - the supplied callback submits the form if there are no errors
+                console.log(chargeAmount);
+                Stripe.card.createToken({
+                    name: $('.card-name').val(),
+                    number: $('.card-number').val(),
+                    cvc: $('.card-cvc').val(),
+                    exp_month: $('.card-expiry-month').val(),
+                    exp_year: $('.card-expiry-year').val()
+                }, chargeAmount, stripeResponseHandler);
+                console.log(this);
+                return false; // submit from callback
+            });
+        });
+
+        if (window.location.protocol === 'file:') {
+            alert("stripe.js does not work when included in pages served over file:// URLs. Try serving this page over a webserver. Contact support@stripe.com if you need assistance.");
+        }
+    </script>
+
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="container">
+
+        <form action="/intro_front_end_apply/" method="POST" id="payment-form" class="form-horizontal">
+            {% csrf_token %}
+            <fieldset>
+
+                <legend>Sign up for Intro to Frontend</legend>
+
+                <span class="payment-errors"></span>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="name">Name</label>
+
+                    <div class="col-md-4">
+                        <input id="name" name="name" type="text" placeholder="" class="card-name form-control input-md">
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="email">Email</label>
+
+                    <div class="col-md-4">
+                        <input id="email" name="email" type="text" placeholder="" class="email form-control input-md">
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="phone">Phone Number</label>
+
+                    <div class="col-md-4">
+                        <input id="email" name="phone" type="text" placeholder="" class="phone form-control input-md">
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="address">Address</label>
+
+                    <div class="col-md-4">
+                        <input id="address" name="address" type="text" placeholder=""
+                               class="address form-control input-md">
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="city">City</label>
+
+                    <div class="col-md-4">
+                        <input id="city" name="city" type="text" placeholder="" class="city form-control input-md"
+                               required="">
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="state">State</label>
+
+                    <div class="col-md-1">
+                        <input id="city" name="state" type="text" placeholder="" class="state form-control input-md"
+                               required="">
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="zip">Zip Code</label>
+
+                    <div class="col-md-4">
+                        <input id="zip" name="zip" type="text" placeholder="" class="zip form-control input-md"
+                               required="">
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Goals">What are your goals for this class?</label>
+
+                    <div class="col-md-4">
+                        <textarea class="goals form-control" id="Goals" name="goals"></textarea>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="card">Card Number</label>
+
+                    <div class="col-md-4">
+                        <input id="card" name="card" type="text" placeholder=""
+                               class="card-number form-control input-md">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="cvc">CVC</label>
+
+                    <div class="col-md-1">
+                        <input id="cvc" name="cvc" type="text" placeholder="" class="card-cvc form-control input-md">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="month">Expiration (MM/YYYY)</label>
+
+                    <div class="col-md-1">
+                        <input id="month" name="month" type="text" placeholder="MM"
+                               class="card-expiry-month form-control input-md">
+                    </div>
+                    <div class="col-md-1">
+                        <input id="year" name="year" type="text" placeholder="YYYY"
+                               class="card-expiry-year form-control input-md">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="paymentbutton"></label>
+
+                    <div class="col-md-4">
+                        <button type="submit" id="paymentbutton" name="paymentbutton" class="submit-button button">Submit Payment of $450
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+{% endblock %}
+
+
