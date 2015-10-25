@@ -15,7 +15,9 @@ NEXT_NIGHT_CLASS_DATE = 'November 9th'
 
 def index(request):
     context = RequestContext(request)
-    context_dict = {'next_night_class_date': NEXT_NIGHT_CLASS_DATE, 'next_day_class_date': NEXT_DAY_CLASS_DATE}
+    context_dict = {
+        'next_night_class_date': NEXT_NIGHT_CLASS_DATE,
+        'next_day_class_date': NEXT_DAY_CLASS_DATE}
 
     return render_to_response('index.html', context_dict, context)
 
@@ -186,7 +188,7 @@ def intro_apply(request):
             subject, from_email, to = "Hi %s, thanks for signing up for our Intro to Programming class!" % name, \
                                       "codeguildpayments@pdxcodeguild.com", \
                                       email
-            html_content = render_to_string('introclassemail.html', context_dict)
+            html_content = render_to_string('intro_programming_class_mail.html', context_dict)
             msg_student = EmailMessage(subject, html_content, from_email, [to])
             msg_student.content_subtype = 'html'
             msg_student.send()
@@ -194,9 +196,8 @@ def intro_apply(request):
             #################################################
             # Email to Staff
             #################################################
-            # TODO make sure this is sending email to admin.
             subject, from_email, to = '%s has signed up for the Intro to Programming class.' % name, 'forms@pdxcodeguild.com', \
-                                      'chris@pdxcodeguild.com'
+                                      'sheri@pdxcodeguild.com'
             text_content = '''Name: %s
             Email address: %s
             Phone number: %s
@@ -224,7 +225,79 @@ def intro_apply(request):
 
     context_dict = {'stripe_key': settings.STRIPE_PUBLISHABLE}
 
-    return render_to_response('intro_apply.html', context_dict, context)
+    return render_to_response('intro_programming_apply.html', context_dict, context)
+
+
+def intro_front_end_apply(request):
+    context = RequestContext(request)
+    if request.method == 'POST':
+        stripe.api_key = settings.STRIPE_SECRET
+        token = request.POST['stripeToken']
+        amount = 45000
+        email = request.POST['email']
+        phone = request.POST['phone']
+        address = request.POST['address']
+        city = request.POST['city']
+        state = request.POST['state']
+        zip_code = request.POST['zip']
+        goals = request.POST['goals']
+
+        try:
+            charge = stripe.Charge.create(
+                amount=amount,  # amount in cents
+                currency="usd",
+                card=token,
+                description="PDX Code Guild's Intro to Front End"
+            )
+
+            name = charge['card']['name']
+            payment = charge['amount'] / 100
+            context_dict = {'name': name, 'payment': payment}
+            from django.core.mail import EmailMultiAlternatives, EmailMessage
+            # ################################################
+            # Email to Students
+            # ################################################
+            subject, from_email, to = "Hi %s, thanks for signing up for our Intro to Front End class!" % name, \
+                                      "codeguildpayments@pdxcodeguild.com", \
+                                      email
+            html_content = render_to_string('intro_front_end_class_mail.html', context_dict)
+            msg_student = EmailMessage(subject, html_content, from_email, [to])
+            msg_student.content_subtype = 'html'
+            msg_student.send()
+
+            #################################################
+            # Email to Staff
+            #################################################
+            subject, from_email, to = '%s has signed up for the Intro to Front End class.' % name, 'forms@pdxcodeguild.com', \
+                                      'sheri@pdxcodeguild.com'
+            text_content = '''Name: %s
+            Email address: %s
+            Phone number: %s
+            Address: \n
+            %s
+            %s, %s %s
+            What are your goals for this class?\n
+            %s
+            ''' % (name, email, phone, address, city, state, zip_code, goals)
+            html_content = 'Name: %s <br>' \
+                           'Email address: %s<br>' \
+                           'Phone number: %s<br>' \
+                           'Address: <br>' \
+                           '%s<br>' \
+                           '%s, %s %s<br>' \
+                           'What are your goals for this class?<br>' \
+                           '%s' % (name, email, phone, address, city, state, zip_code, goals)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+            return render(request, 'payment_thanks.html', context_dict)
+        except stripe.CardError, e:
+            # The card has been declined
+            pass
+
+    context_dict = {'stripe_key': settings.STRIPE_PUBLISHABLE}
+
+    return render_to_response('intro_front_end_apply.html', context_dict, context)
 
 
 def intake(request):
